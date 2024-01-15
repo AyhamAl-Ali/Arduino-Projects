@@ -18,11 +18,11 @@ const byte COLS = 4; // define the number of columns on the keypad
 // Default numpad values
 // map is flipped in both ways horizontally and vertically
 char keys[ROWS][COLS] = {
-  {'\n',    '.'           , 'KEY_KP_0'    , 'KEY_KP_0'    },
-  {'\n',    'KEY_KP_3'    , 'KEY_KP_2'    , 'KEY_KP_1'    },
-  {'+' ,    'KEY_KP_6'    , 'KEY_KP_5'    , 'KEY_KP_4'    },
-  {'+' ,    'KEY_KP_9'    , 'KEY_KP_8'    , 'KEY_KP_7'    },
-  {'-' ,    '*'           , '/'           , '#'           } // KEY_NUM_LOCK
+  {'\n',    '.'           , KEY_KP_0    , KEY_KP_0    },
+  {'\n',    KEY_KP_3      , KEY_KP_2    , KEY_KP_1    },
+  {'+' ,    KEY_KP_6      , KEY_KP_5    , KEY_KP_4    },
+  {'+' ,    KEY_KP_9      , KEY_KP_8    , KEY_KP_7    },
+  {'-' ,    '*'           , '/'         , '#'           } // KEY_NUM_LOCK
 };
 
 // Special keys map
@@ -30,11 +30,11 @@ char keys[ROWS][COLS] = {
 // using '\0' as c++ won't accept empty characters like '' as that's considered escaping character '
 // \0 is null value
 char special_keys[ROWS][COLS] = {
-  {'\0', '\0'     , '\0'     , '\0'     },
-  {'\0', 'KEY_F15', 'KEY_F14', 'KEY_F13'},
-  {'\0', 'KEY_F18', 'KEY_F17', 'KEY_F16'},
-  {'\0', 'KEY_F21', 'KEY_F20', 'KEY_F19'},
-  {'\0', 'KEY_F24', 'KEY_F23', 'KEY_F22'} // KEY_NUM_LOCK
+  {'\0'     , '\0'     , '\0'     , '\0'},
+  {'\0'     , KEY_F15, KEY_F14, KEY_F13 },
+  {'\0     ', KEY_F18, KEY_F17, KEY_F16 },
+  {'\0     ', KEY_F21, KEY_F20, KEY_F19 },
+  {KEY_F24  , KEY_F23, KEY_F22, '#'     } // KEY_NUM_LOCK
 };
 
 // row/column pins 
