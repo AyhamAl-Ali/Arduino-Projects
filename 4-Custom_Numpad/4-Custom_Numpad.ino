@@ -148,14 +148,14 @@ void toggleKeysModeLED() {
     case Modes::SPECIAL:
       if (millis() - timeSinceLastLight >= 200) { // in ms
         digitalWrite(BUILTIN_LED, digitalRead(BUILTIN_LED) ^ 1); // toggle
+        timeSinceLastLight = millis();
       }
-      timeSinceLastLight = millis();
       break;
     case Modes::OFF:
       if (millis() - timeSinceLastLight >= 500) { // in ms
         digitalWrite(BUILTIN_LED, digitalRead(BUILTIN_LED) ^ 1); // toggle
+        timeSinceLastLight = millis();
       }
-      timeSinceLastLight = millis();
       break;
   }
 }
