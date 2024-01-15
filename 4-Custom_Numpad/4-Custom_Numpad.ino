@@ -106,7 +106,7 @@ String getKey() {
         switch (currentMode) {
           case Modes::SPECIAL:
             return String(special_keys[row][col]);
-          case Modes::SPECIAL:
+          case Modes::OFF:
             return String(off_keys[row][col]);
           case Modes::NUMPAD:
             return String(keys[row][col]);
@@ -149,13 +149,13 @@ void toggleKeysModeLED() {
       if (millis() - timeSinceLastLight >= 200) { // in ms
         digitalWrite(BUILTIN_LED, digitalRead(BUILTIN_LED) ^ 1); // toggle
       }
-      timeSinceLastLight = millins();
+      timeSinceLastLight = millis();
       break;
     case Modes::OFF:
       if (millis() - timeSinceLastLight >= 500) { // in ms
         digitalWrite(BUILTIN_LED, digitalRead(BUILTIN_LED) ^ 1); // toggle
       }
-      timeSinceLastLight = millins();
+      timeSinceLastLight = millis();
       break;
   }
 }
