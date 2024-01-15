@@ -62,6 +62,7 @@ void setup() {
   // begin the keyboard library
   Keyboard.begin();
   pinMode(BUILTIN_LED, OUTPUT); // built-in LED for special keys indicator
+  digitalWrite(BUILTIN_LED, HIGH); // turn on by default
 
   // Initialize the keypad
   for (int i = 0; i < ROWS; i++) { // rows
@@ -146,6 +147,12 @@ void toggleKeysModeLED() {
       break;
     case Modes::SPECIAL:
       if (millis() - timeSinceLastLight >= 200) { // in ms
+        digitalWrite(BUILTIN_LED, digitalRead(BUILTIN_LED) ^ 1); // toggle
+      }
+      timeSinceLastLight = millins();
+      break;
+    case Modes::OFF:
+      if (millis() - timeSinceLastLight >= 500) { // in ms
         digitalWrite(BUILTIN_LED, digitalRead(BUILTIN_LED) ^ 1); // toggle
       }
       timeSinceLastLight = millins();
