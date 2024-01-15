@@ -97,7 +97,7 @@ void loop() {
       } else {
         Serial.print("Key Pressed: ");
         Serial.println(key);
-        Keyboard.write(key.c_str()); // Simulate key press
+        Keyboard.write(key.c_str()[0]); // Simulate key press
       }
     }
 
