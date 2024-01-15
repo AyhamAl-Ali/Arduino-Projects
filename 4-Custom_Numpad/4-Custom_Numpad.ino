@@ -85,11 +85,11 @@ void loop() {
     } else {
       Keyboard.write(key.c_str()[0]); // Simulate key press -- convert string to list of characters and grab the first character
     }
-
-    toggleKeysModeLED(); // disabled for later rework
     
     delay(1); // delay in ms to avoid bugs such as multiple prints for a single press, must not be very high otherwise fast typing won't work
   }
+
+  checkLighting(); // disabled for later rework
 }
 
 // Get key pressed
@@ -139,8 +139,8 @@ void toggleKeysMode() {
   currentMode = getNextEnumValue(currentMode, Modes::COUNT);
 }
 
-// toggle LED based on mode, currently disabled for later rework
-void toggleKeysModeLED() {
+// toggle/check LED based on mode
+void checkLighting() {
   switch (currentMode) {
     case Modes::NUMPAD:
       digitalWrite(BUILTIN_LED, HIGH);
