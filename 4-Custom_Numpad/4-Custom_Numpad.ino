@@ -3,6 +3,7 @@
 enum Modes {
   NUMPAD, // 0
   SPECIAL, // 1
+  OFF, // 2
   COUNT // this is not a mode, it's just a trick to indicate max value for modes to use getNextEnumValue() function
 };
 
@@ -35,6 +36,19 @@ char special_keys[ROWS][COLS] = {
   {'\0     ', KEY_F18, KEY_F17, KEY_F16 },
   {'\0     ', KEY_F21, KEY_F20, KEY_F19 },
   {KEY_F24  , KEY_F23, KEY_F22, '#'     } // KEY_NUM_LOCK
+};
+
+
+// Special keys map
+// empty keys (\0) are yet to be assigned, as of now I don't have a use for them, but later I will
+// using '\0' as c++ won't accept empty characters like '' as that's considered escaping character '
+// \0 is null value
+char off_keys[ROWS][COLS] = {
+  { '\0', '\0', '\0', '\0' },
+  { '\0', '\0', '\0', '\0' },
+  { '\0', '\0', '\0', '\0' },
+  { '\0', '\0', '\0', '\0' },
+  { '\0', '\0', '\0', '#'  }  // KEY_NUM_LOCK
 };
 
 // row/column pins 
@@ -91,6 +105,8 @@ String getKey() {
         switch (currentMode) {
           case Modes::SPECIAL:
             return String(special_keys[row][col]);
+          case Modes::SPECIAL:
+            return String(off_keys[row][col]);
           case Modes::NUMPAD:
             return String(keys[row][col]);
         }
@@ -132,6 +148,7 @@ void toggleKeysModeLED() {
       if (millis() - timeSinceLastLight >= 200) { // in ms
         digitalWrite(BUILTIN_LED, digitalRead(BUILTIN_LED) ^ 1); // toggle
       }
+      timeSinceLastLight = millins();
       break;
   }
 }
