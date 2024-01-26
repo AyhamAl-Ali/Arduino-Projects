@@ -2,22 +2,23 @@
 
 <details>
   <summary>Pictures</summary>
-
-  ![numpad](./Pictures/1000107507.jpg)
   
-  ![numpad](Pictures/1000107508.jpg)
+  ![Alt text](Pictures/20240126_164439.jpg)
   
-  ![numpad](/Pictures/1000107509.jpg)
+  ![Alt text](Pictures/20240126_164443.jpg)
   
-  ![numpad](1000107510.jpg)
+  ![Alt text](Pictures/20240126_164452.jpg)
   
-  ![numpad](1000107511.jpg)
+  ![Alt text](Pictures/20240126_164455.jpg)
   
-  ![numpad](1000107559.jpg)
+  ![Alt text](Pictures/20240126_164506.jpg)
   
-  ![numpad](1000107560.jpg)
+  ![Alt text](Pictures/20240126_164508.jpg)
   
-  ![numpad](1000107563.jpg)
+  ![Alt text](Pictures/20240126_214818.jpg)
   
+  ![Alt text](Pictures/20240126_214822.jpg)
+  
+  ![Alt text](Pictures/20240126_214847.jpg)
   <video src="Pictures/1000107561.mp4" controls title="Title"></video>
 </details>
