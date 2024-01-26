@@ -9,9 +9,18 @@ enum Modes {
 
 int currentMode = Modes::NUMPAD; // default is numpad mode
 
-int timeSinceLastLight = 0; // time since last blink
-bool light_status = true; // default is constantly on
-const int BUILTIN_LED = 17; // pro micro built-in LED pin
+// int timeSinceLastLight = 0; // time since last blink
+// bool light_status = true; // default is constantly on
+// const int BUILTIN_LED = 17; // pro micro built-in LED pin
+
+// RGB LED
+int RGB_LED_RED_PIN = 9;
+int RGB_LED_GREEN_PIN = 6;
+int RGB_LED_BLUE_PIN = 5;
+
+// WHITE LED
+int WHITE_LED_PIN = 19;
+
 
 const byte ROWS = 5; // define the number of rows on the keypad
 const byte COLS = 4; // define the number of columns on the keypad
@@ -52,8 +61,8 @@ char off_keys[ROWS][COLS] = {
 };
 
 // row/column pins 
-byte rowPins[ROWS] = {6, 5, 4, 3, 2}; // connect to the row pinouts of the keypad
-byte colPins[COLS] = {10, 9, 8, 7}; // connect to the column pinouts of the keypad
+byte rowPins[ROWS] = {18, 14, 4, 15, 2}; // connect to the row pinouts of the keypad
+byte colPins[COLS] = {10, 16, 8, 7}; // connect to the column pinouts of the keypad
 
 // setup funs once at device connection, for setting up the device configuration
 void setup() {
@@ -61,8 +70,16 @@ void setup() {
 
   // begin the keyboard library
   Keyboard.begin();
-  pinMode(BUILTIN_LED, OUTPUT); // built-in LED for special keys indicator
-  digitalWrite(BUILTIN_LED, HIGH); // turn on by default
+  // pinMode(BUILTIN_LED, OUTPUT); // built-in LED for special keys indicator
+  // digitalWrite(BUILTIN_LED, HIGH); // turn on by default
+
+  // LED Setup
+  pinMode(RGB_LED_RED_PIN, OUTPUT);
+  pinMode(RGB_LED_GREEN_PIN, OUTPUT);
+  pinMode(RGB_LED_BLUE_PIN, OUTPUT);
+  pinMode(WHITE_LED_PIN, OUTPUT);
+
+  digitalWrite(WHITE_LED_PIN, HIGH); // turn on WHITE LED by default
 
   // Initialize the keypad
   for (int i = 0; i < ROWS; i++) { // rows
@@ -72,6 +89,9 @@ void setup() {
     pinMode(colPins[i], OUTPUT);
     digitalWrite(colPins[i], HIGH);
   }
+
+  updateLighting();
+  
 }
 
 // loop keeps re-running as fast as possible
@@ -88,8 +108,6 @@ void loop() {
     
     delay(1); // delay in ms to avoid bugs such as multiple prints for a single press, must not be very high otherwise fast typing won't work
   }
-
-  checkLighting(); // disabled for later rework
 }
 
 // Get key pressed
@@ -137,25 +155,27 @@ T getNextEnumValue(T currentEnum, int maxCount) {
 // toggle modes
 void toggleKeysMode() {
   currentMode = getNextEnumValue(currentMode, Modes::COUNT);
+  updateLighting();
 }
 
 // toggle/check LED based on mode
-void checkLighting() {
+void updateLighting() {
   switch (currentMode) {
     case Modes::NUMPAD:
-      digitalWrite(BUILTIN_LED, HIGH);
+      setRGBColor(0, 255, 42); // green
       break;
     case Modes::SPECIAL:
-      if (millis() - timeSinceLastLight >= 200) { // in ms
-        digitalWrite(BUILTIN_LED, digitalRead(BUILTIN_LED) ^ 1); // toggle
-        timeSinceLastLight = millis();
-      }
+      setRGBColor(157, 0, 255); // purple
       break;
     case Modes::OFF:
-      if (millis() - timeSinceLastLight >= 500) { // in ms
-        digitalWrite(BUILTIN_LED, digitalRead(BUILTIN_LED) ^ 1); // toggle
-        timeSinceLastLight = millis();
-      }
+      setRGBColor(0, 0, 0); // black - off
       break;
   }
+}
+
+// RGB LED Control
+void setRGBColor(int red, int green, int blue) {
+  analogWrite(RGB_LED_RED_PIN, red);
+  analogWrite(RGB_LED_GREEN_PIN, green);
+  analogWrite(RGB_LED_BLUE_PIN, blue);
 }
